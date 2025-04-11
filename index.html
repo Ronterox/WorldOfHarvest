@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World of Harvest</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="toolbar">
+            <div class="seed-container">
+                <div class="seed" draggable="true" data-seed="carrot">🥕 Carrot</div>
+                <div class="arrow">➡</div>
+                <div class="seed locked" data-seed="tomato">🔒 ???</div>
+                <div class="arrow">➡</div>
+                <div class="seed locked" data-seed="corn">🔒 ???</div>
+                <div class="arrow">➡</div>
+                <div class="seed locked" data-seed="potato">🔒 ???</div>
+                <div class="arrow">➡</div>
+                <div class="seed locked" data-seed="pepper">🔒 ???</div>
+                <div class="arrow">➡</div>
+                <div class="seed locked" data-seed="eggplant">🔒 ???</div>
+                <div class="arrow">➡</div>
+                <div class="seed locked" data-seed="cucumber">🔒 ???</div>
+                <div class="arrow">➡</div>
+                <div class="seed locked" data-seed="onion">🔒 ???</div>
+            </div>
+            <div class="tools">
+                <button id="waterBtn">💧 Water</button>
+                <div class="money">💰 <span id="moneyDisplay">0</span></div>
+            </div>
+            <div id="soundControl">
+                <button id="muteButton" class="control-button">
+                    <span id="soundIcon">🔊</span>
+                </button>
+            </div>
+        </div>
+        <div class="game-area">
+            <canvas id="gameCanvas"></canvas>
+            <div class="side-panel">
+                <div id="sellArea">
+                    <div class="sell-icon">💰</div>
+                    <div class="sell-text">Drag plants here to sell</div>
+                </div>
+                <div id="shopArea">
+                    <h3>Shop</h3>
+                    <div id="shopItems" class="shop-items">
+                        <!-- Items will be generated dynamically -->
+                    </div>
+                    <button id="rerollShop" class="reroll-button">Reroll Shop (💰50)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="dragOverlay"></div>
+    <script src="game.js"></script>
+    <script src="sounds.js"></script>
+    <script>
+        new Game();
+    </script>
+</body>
+</html>
