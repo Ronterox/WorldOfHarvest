@@ -137,6 +137,7 @@ class Game {
         this.unlockedPlants = new Set(['carrot']);
         this.mergeHint = null;
         this.sellHint = null;
+        this.cellPriceHint = null;
 
         this.unlockedCells = new Set();
         this.cellPrice = 4;
@@ -236,6 +237,27 @@ class Game {
         // Add to the body
         document.body.appendChild(hint);
         this.mergeHint = hint;
+    }
+
+    showCellPriceHint(x, y) {
+        if (this.cellPriceHint) {
+            this.cellPriceHint.remove();
+        }
+
+        const hint = document.createElement('div');
+
+        const canvasRect = this.canvas.getBoundingClientRect();
+
+        hint.style.position = 'fixed';
+        hint.style.left = canvasRect.left + x + 'px';
+        hint.style.top = canvasRect.top + y + 'px';
+
+        hint.innerHTML = `<span style="font-size: 32px; text-shadow: 0 0 10px gold;">${this.cellPrice}💰</span>`;
+
+        // Add to the body
+        document.body.appendChild(hint);
+        this.cellPriceHint = hint;
+
     }
 
     removeMergeHint() {
@@ -450,6 +472,17 @@ class Game {
                 this.dragOverlay.style.transform = `translate(${this.mouseX - 24}px, ${this.mouseY - 24}px)`;
             }
         });
+
+        this.canvas.addEventListener('mousemove', (e) => {
+            const x = Math.floor(e.offsetX / this.gridSize) * this.gridSize;
+            const y = Math.floor(e.offsetY / this.gridSize) * this.gridSize;
+
+            if (!this.unlockedCells.has(this.getCellKey(x, y))) {
+                this.showCellPriceHint(x, y);
+            } else if (this.cellPriceHint) {
+                this.cellPriceHint.remove();
+            }
+        })
 
         document.addEventListener('mouseup', (e) => {
             if (this.draggedPlant) {
