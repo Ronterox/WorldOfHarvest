@@ -253,6 +253,7 @@ class Game {
         hint.style.top = canvasRect.top + y + 'px';
 
         hint.innerHTML = `<span style="font-size: 32px; text-shadow: 0 0 10px gold;">${this.cellPrice}💰</span>`;
+        hint.style.pointerEvents = 'none';
 
         // Add to the body
         document.body.appendChild(hint);
@@ -557,6 +558,9 @@ class Game {
                 // Show floating money text
                 this.showFloatingText(`-$${this.cellPrice}`, x + this.gridSize / 2, y + this.gridSize / 2, 'red');
                 this.cellPrice = Math.floor(this.cellPrice * 1.5);
+
+                this.cellPriceHint.remove();
+                this.cellPriceHint = null;
             }
 
             if (this.selectedTool === 'water' && this.unlockedCells.has(cellkey)) {
