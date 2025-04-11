@@ -559,7 +559,7 @@ class Game {
                 this.cellPrice = Math.floor(this.cellPrice * 1.5);
             }
 
-            if (this.selectedTool === 'water') {
+            if (this.selectedTool === 'water' && this.unlockedCells.has(cellkey)) {
                 const plant = this.plants.find(p => p.x === x && p.y === y);
                 if (plant) plant.addWater();
             }
@@ -809,6 +809,8 @@ class Game {
 
     update(deltaTime) {
         this.plants.forEach((plant, index) => {
+            if (!this.unlockedCells.has(this.getCellKey(plant.x, plant.y))) return;
+
             const cellUpgrades = this.getCellUpgrades(plant.x, plant.y);
             plant.update(cellUpgrades, deltaTime);
 

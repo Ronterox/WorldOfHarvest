@@ -164,7 +164,7 @@ body {
 .side-panel {
     width: 200px;
     position: fixed;
-    right: 20px;
+    right: 5%;
     display: flex;
     flex-direction: column;
     gap: 20px;
